@@ -17,6 +17,8 @@
       "/etc/machine-id"
       "/flake.nix"
       "/flake.lock"
+      "/subvolume.nix"
+      "/bash.sh"
     ];
   };
 }
