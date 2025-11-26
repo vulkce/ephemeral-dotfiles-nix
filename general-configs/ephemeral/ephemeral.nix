@@ -48,7 +48,6 @@
     device = "/dev/disk/by-label/home";
     fsType = "xfs";
     options = [
-      "compress=zstd"
       "noatime"
       "nofail" # não falha o boot se não encontrar
     ];
