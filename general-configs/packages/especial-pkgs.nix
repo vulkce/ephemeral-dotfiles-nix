@@ -101,6 +101,17 @@ in
 
     # needed if you use swap
     kubelet.extraOpts = "--fail-swap-on=false";
+
+  };
+
+# -------- NH --------
+
+  # habilita o nh
+  programs.nh = {
+    enable = false;
+    clean.enable = true; # faz o trabalho do cg
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/"; # localização da minha flake
   };
 
 }
