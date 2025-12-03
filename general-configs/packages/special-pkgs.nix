@@ -1,12 +1,12 @@
 { config, lib, inputs, pkgs, ... }:
 
-let
+#let
 
-  kubeMasterIP = "10.1.1.2";
-  kubeMasterHostname = "api.kube";
-  kubeMasterAPIServerPort = 6443;
+#  kubeMasterIP = "10.1.1.2";
+#  kubeMasterHostname = "api.kube";
+#  kubeMasterAPIServerPort = 6443;
 
-in
+#in
 
 {
 
@@ -77,41 +77,41 @@ in
 # -------- KUBERNETES --------
 
   # resolve master hostname
-  networking.extraHosts = "${kubeMasterIP} ${kubeMasterHostname}";
+#  networking.extraHosts = "${kubeMasterIP} ${kubeMasterHostname}";
 
   # packages for administration tasks
-  environment.systemPackages = with pkgs; [
-    kompose
-    kubectl
-    kubernetes
-  ];
+#  environment.systemPackages = with pkgs; [
+#    kompose
+#    kubectl
+#    kubernetes
+#  ];
 
-  services.kubernetes = {
-    roles = ["master" "node"];
-    masterAddress = kubeMasterHostname;
-    apiserverAddress = "https://${kubeMasterHostname}:${toString kubeMasterAPIServerPort}";
-    easyCerts = true;
-    apiserver = {
-      securePort = kubeMasterAPIServerPort;
-      advertiseAddress = kubeMasterIP;
-    };
+#  services.kubernetes = {
+#    roles = ["master" "node"];
+#    masterAddress = kubeMasterHostname;
+#    apiserverAddress = "https://${kubeMasterHostname}:${toString kubeMasterAPIServerPort}";
+#    easyCerts = true;
+#    apiserver = {
+#      securePort = kubeMasterAPIServerPort;
+#      advertiseAddress = kubeMasterIP;
+#    };
 
     # use coredns
-    addons.dns.enable = true;
+#    addons.dns.enable = true;
 
     # needed if you use swap
-    kubelet.extraOpts = "--fail-swap-on=false";
+#    kubelet.extraOpts = "--fail-swap-on=false";
 
-  };
+#  };
 
 # -------- NH --------
 
   # habilita o nh
   programs.nh = {
-    enable = false;
+    enable = true;
     clean.enable = true; # faz o trabalho do cg
     clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/"; # localização da minha flake
+    flake = "/persist/"; # localização da minha flake
   };
 
 }
