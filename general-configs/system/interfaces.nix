@@ -6,14 +6,14 @@
 # -------- LOGIN --------
 
   # SDDM
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.displayManager.cosmic-greeter.enable = false;
+  services.displayManager.sddm.enable = false;
+  services.displayManager.sddm.wayland.enable = false;
+  services.displayManager.cosmic-greeter.enable = true;
 
 # -------- DEs --------
 
   # PLASMA
-  services.desktopManager.plasma6.enable = true;
+  services.desktopManager.plasma6.enable = false;
 
   # COSMIC
   services.desktopManager.cosmic.enable = true;
@@ -35,7 +35,7 @@
 
   # hyprland
   programs.hyprland = {  
-    enable = true;
+    enable = false;
     xwayland.enable = true;
   }; 
 
