@@ -17,7 +17,7 @@
       vesktop
       gnome-secrets
       mission-center
-     ];
+    ];
   };
 
 }
