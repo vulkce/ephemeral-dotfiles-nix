@@ -90,7 +90,7 @@
     auto = {
       enable = true;
       onCalendar = "weekly";
-    }
+    };
   };
 
 }
