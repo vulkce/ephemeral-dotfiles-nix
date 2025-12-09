@@ -52,11 +52,11 @@
   
   # aplicativos declarados
   services.flatpak.packages = [
-    { appId = "app.zen_browser.zen"; origin = "flathub"; }
-              "org.vinegarhq.Sober"
-              "net.newpipe.NewPipe"
-              "org.raspberrypi.rpi-imager"
-    { appId = "com.bitwarden.desktop"; origin = "flathub"; }
+    "app.zen_browser.zen"; 
+    "org.vinegarhq.Sober"
+    "net.newpipe.NewPipe"
+    "org.raspberrypi.rpi-imager"
+    "com.bitwarden.desktop"
   ];
 
   # atualização automática:
