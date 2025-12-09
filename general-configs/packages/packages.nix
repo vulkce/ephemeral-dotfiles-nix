@@ -42,22 +42,18 @@
 
   # repositórios usados para instalar aplicativos
   services.flatpak.remotes = [
-    
     { 
       name = "flathub";
       location = "https://flathub.org/repo/flathub.flatpakrepo"; 
     }
-    
     {
       name = "gnome-nightly"; 
       location = "https://nightly.gnome.org/gnome-nightly.flatpakrepo"; 
     } 
-    
     {
       name = "elementaryos"; 
       location = "https://flatpak.elementary.io/repo.flatpakrepo"; 
     }  
-    
     { 
       name = "PureOS"; 
       location = "https://store.puri.sm/repo/stable/pureos.flatpakrepo"; 
@@ -66,27 +62,22 @@
   
   # aplicativos declarados
   services.flatpak.packages = [
-    
     { 
       appId = "app.zen_browser.zen"; 
       origin = "flathub"; 
     }
-    
     { 
       appId = "org.vinegarhq.Sober";
       origin = "flathub";
     }
-    
     {
       appId = "net.newpipe.NewPipe";
       origin = "flathub";
     }
-    
     {
       appId = "org.raspberrypi.rpi-imager";
       origin = "flathub";
     }
-    
     {
       appId = "com.bitwarden.desktop";
       origin = "flathub";
