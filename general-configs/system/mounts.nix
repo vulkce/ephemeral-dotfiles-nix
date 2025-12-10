@@ -41,6 +41,7 @@
     options = [
       "noatime"
       "nofail" # não falha o boot se não encontrar
+      "x-systemd.device-timeout=5" # timeout curto!
     ];
   };
 
