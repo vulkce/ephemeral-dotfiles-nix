@@ -5,50 +5,48 @@
 
 # -------- LOGIN --------
 
-  # SDDM
-  services.displayManager.sddm.enable = false;
-  services.displayManager.sddm.wayland.enable = false;
-  
-  # GREETER
-  services.displayManager.cosmic-greeter.enable = true;
+  services.displayManager = {
+    cosmic-greeter.enable = true; # cosmic greeter
+    sddm = { # SDDM
+      enable = false;
+      wayland.enable = false;
+    };
+  };
 
 # -------- DEs --------
 
   # PLASMA
-  services.desktopManager.plasma6.enable = false;
-
-  # COSMIC
-  services.desktopManager.cosmic.enable = true;
-
-  # GNOME
-  services.desktopManager.gnome.enable = false;
-
-  # XFCE
-  services.xserver.desktopManager.xfce.enable = true;
-
-  # cinnamon
-  services.xserver.desktopManager.cinnamon.enable = false;
-
-  # evitar conflito entre gnome e kde
- # programs.ssh.askPassword = lib.mkForce "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
-
+  services  = { 
+    # WAYLAND
+    desktopManager = {
+      plasma6.enable = false; # plasma
+      cosmic.enable = true; # cosmic
+      gnome.enable = false; # gnome
+    };
+    
+    # xserver
+    xserver.desktopManager = {
+      xfce.enable = true; # xfce
+      cinnamon.enable = false; # cinnamon
+    };
+  };
 
 # -------- WMs -------- 
 
-  # hyprland
-  programs.hyprland = {  
-    enable = false;
-    xwayland.enable = true;
+  # wayland WMs
+  programs = {
+    sway.enable = false; # sway
+    hyprland = { # hyprland
+      enable = true;
+      xwayland.enable = true;
+    };      
   }; 
 
-  # i3 WM
-  services.xserver.windowManager.i3.enable = false;
-
-  # sway
-  programs.sway.enable = false;
-
-  # openbox
-  services.xserver.windowManager.openbox.enable = false;
+  # xserver WMs
+  services.xserver.windowManager = {
+    i3.enable = false; # i3 WM
+    openbox.enable = false; # openbox
+  };
 
 # -------- EXCLUDE --------
 
@@ -66,5 +64,4 @@
     tali
     totem
   ]);
-
 }
