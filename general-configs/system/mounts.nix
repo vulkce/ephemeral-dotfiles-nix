@@ -39,29 +39,33 @@
   specialisation = {
     Home = {
       inheritParentConfig = true;
-      system.nixos.tags = [ "Home" ];
-      # home separada
-      fileSystems."/home" = {
-        device = "/dev/disk/by-label/home";
-        fsType = "xfs";
-        options = [ "noatime" "nofail" "x-systemd.device-timeout=5" ];
+      configuration = {
+        system.nixos.tags = [ "Home" ];
+        # home separada
+        fileSystems."/home" = {
+          device = "/dev/disk/by-label/home";
+          fsType = "xfs";
+          options = [ "noatime" "nofail" "x-systemd.device-timeout=5" ];
+        };
       };
     };
     TempHome = {
       inheritParentConfig = true;
-      system.nixos.tags = [ "TempHome" ];
-      # home interna
-      fileSystems."/home" = {
-        device = "none"; 
-        fsType = "tmpfs"; # filesystem temporário na ram
-        options = [ "size=8G" "mode=777" ]; # options para o tmpfs
-      };
-      # usa systemd para criar uma home
-      systemd.tmpfiles.settings."10-home-vulkce" = {
-        "/home/vulkce".d = {
-          mode = "0755";
-          user = "vulkce";
-          group = "users";
+      configuration = {
+        system.nixos.tags = [ "TempHome" ];
+        # home interna
+        fileSystems."/home" = {
+          device = "none"; 
+          fsType = "tmpfs"; # filesystem temporário na ram
+          options = [ "size=8G" "mode=777" ]; # options para o tmpfs
+        };
+        # usa systemd para criar uma home
+        systemd.tmpfiles.settings."10-home-vulkce" = {
+          "/home/vulkce".d = {
+            mode = "0755";
+            user = "vulkce";
+            group = "users";
+          };
         };
       };
     };
