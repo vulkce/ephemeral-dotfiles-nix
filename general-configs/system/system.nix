@@ -2,22 +2,24 @@
 
 # -------- NIXOS --------
 
-  # usa systemd-boot
-  boot.loader.systemd-boot.enable = true;
-
-  # define e configura o kernel
-  boot.kernelPackages = pkgs.linuxPackages_lqx; # kernel LQX, kernel com foco em baixa latencia e gaming
-  boot.kernelModules = [ "kvm-amd" "hid_playstation" "hid_sony" "uinput" ]; # modulos do kernel
-
-  # nome do sistema
-  networking.hostName = "flake";
-
-  # usa o networkmanager
-  networking.networkmanager.enable = true;
+  # define e configura options do boot
+  boot = {
+    kernelPackages = pkgs.linuxPackages_lqx; # kernel LQX, kernel com foco em baixa latencia e gaming
+    kernelModules = [ "kvm-amd" "hid_playstation" "hid_sony" "uinput" ]; # modulos do kernel
+    supportedFilesystems = [ "zfs" ]; # filesystems extras
+    loader.systemd-boot.enable = true; # usa systemd-boot
+  };
 
   # timezone
   time.timeZone = "America/Sao_Paulo";
-
+  
+  # nome do sistema
+  networking = {
+    hostName = "flake"; # configura o hostname 
+    hostId = "8bec9fba"; # configura o hostId para o zfs
+    networkmanager.enable = true; # usa o networkmanager
+  };
+  
   # pipewire
   services.pipewire = {
     enable = true;
@@ -29,11 +31,7 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true; # inicia o bluetooth no boot
-  };
-
-  # configura o bluetooth
-  hardware.bluetooth.settings = {
-    General = {
+    settings.General = {
       ControllerMode = "bredr";
       Experimental = true; # mostra mais informações sobre o dispositivo
     };
@@ -57,6 +55,11 @@
 
 # -------- OPTIMIZATION --------
 
+  # define o perfil de energia como performace
+  powerManagement = {
+    cpuFreqGovernor = "performance";
+  };
+
   boot.kernelParams = [
     "idle=poll" # pode reduzir latencia
     "amd_pstate=active" # o hardware controla
@@ -79,13 +82,22 @@
   zramSwap = {
     enable = true;
     memoryPercent = 75;
-    algorithm = "lzo-rle"; # I love lzo-rle
+    algorithm = "lz4";
     priority = 5; # preferencia pela zram
   };
 
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
+  # configura a GPU corretamente
+  hardware = {
+    amdgpu.opencl.enable = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+  };
+
+  nix.settings = {
+    max-jobs = "auto"; # usa todos os cores
+    cores = 0; # distribui a carga
   };
 
   # swap normal
@@ -111,8 +123,4 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-  # habilita suporte ao openZFS
-  networking.hostId = "8bec9fba";
-  boot.supportedFilesystems = [ "zfs" ];
 }
