@@ -6,7 +6,7 @@
   boot.loader.systemd-boot.enable = true;
 
   # define e configura o kernel
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_lqx; # kernel LQX, kernel com foco em baixa latencia e gaming
   boot.kernelModules = [ "kvm-amd" "hid_playstation" "hid_sony" "uinput" ]; # modulos do kernel
 
   # nome do sistema
