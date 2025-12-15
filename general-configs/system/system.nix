@@ -28,7 +28,6 @@
     initrd.kernelModules = [ 
       "dm-snapshot" 
     ];
-    extraModulePackages = [ ];
     loader.systemd-boot.enable = true; # usa systemd-boot
     # zfs
     supportedFilesystems = [ "zfs" ]; # filesystems extras
@@ -69,7 +68,6 @@
       cores = 0; # distribui a carga
       experimental-features = [ "nix-command" "flakes" ]; # experimental
     };
-    
   };
 
   nixpkgs = {
@@ -118,5 +116,6 @@
     };
   };
 
+  # importa configurações de hardware não detectadas 
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 }
