@@ -31,10 +31,18 @@
     initrd.systemd = {
       enable = true;
       services.initrd-rollback-root = {
-        after = [ "zfs-import-rpool.service" ];
-        wantedBy = [ "initrd.target" ];
-        before = [ "sysroot.mount" ];
-        path = [ pkgs.zfs ];
+        after = [ 
+          "zfs-import-rpool.service"
+        ];
+        wantedBy = [ 
+          "initrd.target" 
+        ];
+        before = [ 
+          "sysroot.mount" 
+        ];
+        path = [ 
+          pkgs.zfs 
+        ];
         description = "Rollback para SnapShot em branco";
         unitConfig.DefaultDependencies = "no";
         serviceConfig.Type = "oneshot";
