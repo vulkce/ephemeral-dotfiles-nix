@@ -21,13 +21,6 @@
     neededForBoot = true;
   };
 
-  fileSystems."/var/log" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "zfs";
-  #  options = [ "subvol=var_log" "noatime" ];
-    neededForBoot = true;
-  };
-
   fileSystems."/boot" = {
     device = "/dev/disk/by-label/BOOT";
     fsType = "vfat";
