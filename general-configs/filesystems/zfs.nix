@@ -27,7 +27,7 @@
     zfs.removeLinuxDRM = true; # protege o zfs caso futuras atts de kernels quebrem o zfs por conta da GPL
   };
 
-  filesystem = {
+  fileSystems = {
     "/" = {
       device = "nixos/system/root";
       fsType = "zfs";

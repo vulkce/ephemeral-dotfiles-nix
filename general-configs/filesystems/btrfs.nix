@@ -26,7 +26,7 @@
     umount /btrfs_tmp
   '';
 
-  filesystem = {
+  fileSystems = {
     "/" = {
       device = "/dev/disk/by-label/nixos";
       fsType = "btrfs";
