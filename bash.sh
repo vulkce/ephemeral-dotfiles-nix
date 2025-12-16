@@ -3,8 +3,10 @@
 # esse script é um script SIMPLES de instalação para o meu sistema! ^^
 resp="n"
 
-echo "digite 1 para BTRFS e 2 para ZFS"
 echo "lembre-se de ter uma home criada em XFS antes de executar isso!"
+echo "rode como root para funcionar!"
+echo "---------------------------------"
+echo "digite 1 para BTRFS e 2 para ZFS"
 read fstype
 echo "escolhido: $fstype"
 echo "-------------------"
@@ -84,7 +86,7 @@ else
 
   zfs snapshot nixos/system/root@blank # cria uma snapshot vazia do root
 
-  sudo zfs set acltype=posixacl nixos/system # define as permissões do ZFS como POSIX
+  zfs set acltype=posixacl nixos/system # define as permissões do ZFS como POSIX
 
   git clone https://github.com/vulkce/ephemeral-dotfiles-nix.git /mnt/persist/
 
