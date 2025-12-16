@@ -32,7 +32,7 @@
       enable = true;
       services.initrd-rollback-root = {
         after = [ 
-          "zfs-import-rpool.service"
+          "zfs-import-nixos.service"
         ];
         wantedBy = [ 
           "initrd.target" 
@@ -40,14 +40,12 @@
         before = [ 
           "sysroot.mount" 
         ];
-        path = [ 
-          pkgs.zfs 
-        ];
+        path = with pkgs; [ zfs ];
         description = "Rollback para SnapShot em branco";
         unitConfig.DefaultDependencies = "no";
         serviceConfig.Type = "oneshot";
         script = ''
-          zfs rollback -r rpool/local/root@blank
+          zfs rollback -r nixos/system/root@blank
         '';
       };
     };
