@@ -1,21 +1,33 @@
 #!/usr/bin/env bash
 
 # esse script é um script SIMPLES de instalação para o meu sistema! ^^
+# por enquanto não existem validações de entrada, então cuidado
 resp="n"
+linha="120" # facilita a minha manutenção
 
 echo "--------------LEMBRETES--------------"
-echo "lembre-se de ter uma home criada em XFS antes de executar isso!"
 echo "rode como root para funcionar!"
 echo "comente o packages.nix das flakes para uma instalação limpa!"
 echo "-------------------------------------"
 
-while [ $resp = "n" ]; do
+while [ "$resp" = "n" ]; do
   echo "digite '1' para BTRFS e '2' para ZFS"
   read fstype
   echo "diga a unidade no qual o sistema vai ser instalado (/dev/sdX)"
   read unidade 
   echo "unidade digitada: $unidade"
-  echo "isso está correto? (s/n)"
+  echo "você deseja criar uma home? (s/n)"
+  read home
+  if [ $home = "s"]; then
+    echo "digite o filesystem da home [ ext4, xfs, btrfs ]"
+    read homeFS
+    echo "qual a unidade que a home vai ser instalada? (/dev/sdX)"
+    echo "lembre-se, não deve ser a mesma unidade do sistema!"
+    read homeU
+    mkfs.$homeFS -L home $homeU
+    sed -i "${linha}c\          fsType = \"$homeFS\";" /mnt/persist/general-configs/system.nix
+  fi
+  echo "tem certeza? (s/n)"
   read resp
   echo "-------------------"
 done
