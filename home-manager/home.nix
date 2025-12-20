@@ -24,6 +24,4 @@
       user.email = "vulkce@proton.me";
     };
   };
-
-
 }
