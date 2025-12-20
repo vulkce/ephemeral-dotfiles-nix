@@ -1,16 +1,26 @@
 { config, pkgs, ... }: {
 
-    home.username = "vulkce";
-    home.homeDirectory = "/home/vulkce";
-    home.stateVersion = "25.11";
+  home = {
+    username = "vulkce";
+    homeDirectory = "/home/vulkce";
+    stateVersion = "26.05";
+    packages = with pkgs; [
+      tree
+      vesktop
+      mission-center
+      prismlauncher
+      vscodium
+      gnome-secrets
+    ];
+  };
 
-    home.packages = with pkgs; [];
-
-    programs.git = {
-      enable = true;
-      settings = {
-        user.name = "vulkce";
-        user.email = "vulkce@proton.me";
-      };
+  programs.git = {
+    enable = true;
+    settings = {
+      user.name = "vulkce";
+      user.email = "vulkce@proton.me";
     };
+  };
+
+
 }
