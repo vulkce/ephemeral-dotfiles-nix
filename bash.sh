@@ -74,9 +74,9 @@ else
   # -------- ZFS --------
   # estou usando atualmente
 
-  zpool create -f -o ashift=12 nixos $unidade # ashift=12 é bom para SSDs
+  zpool create -f -o ashift=12 mountpoint=legacy nixos $unidade # ashift=12 é bom para SSDs
 
-  zfs create nixos/system # cria um dataset
+  zfs create -o mountpoint=legacy nixos/system # cria um dataset
 
   # cria sub-datasets
   zfs create -p -o mountpoint=legacy nixos/system/root 
