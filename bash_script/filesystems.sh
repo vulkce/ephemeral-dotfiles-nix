@@ -6,7 +6,7 @@
                 mkfs.btrfs -L nixos ${system_disk}2
 
                 # Montar e criar subvolumes
-                mount /dev/disk/by-label/nixos /mnt
+                mount ${system_disk}2 /mnt
 
                 btrfs subvolume create /mnt/root
                 btrfs subvolume create /mnt/nix
@@ -18,14 +18,14 @@
                 umount /mnt
 
                 # Montar a raiz
-                mount -o subvol=root,compress=zstd,noatime /dev/disk/by-label/nixos /mnt
+                mount -o subvol=root,compress=zstd,noatime ${system_disk}2 /mnt
 
                 # cria os diretórios no liveCD 
                 mkdir -p /mnt/{nix,safe,boot,home,git}
 
                 # Montar outros subvolumes do sistema
-                mount -o subvol=nix,compress=zstd,noatime /dev/disk/by-label/nixos /mnt/nix
-                mount -o subvol=safe,compress=zstd,noatime /dev/disk/by-label/nixos /mnt/safe
+                mount -o subvol=nix,compress=zstd,noatime ${system_disk}2 /mnt/nix
+                mount -o subvol=safe,compress=zstd,noatime ${system_disk}2 /mnt/safe
 
                 install # executa a instalacao
             } >> log.txt
@@ -71,7 +71,7 @@
                         ;;
                 esac
 
-                mount /dev/disk/by-label/nixos /mnt
+                mount ${system_disk}2 /mnt
 
                 mkdir -p /mnt/{nix/safe/system,boot,home,git}
 
@@ -84,7 +84,7 @@
 
                 mkfs.$system_fs -L nixos -f ${system_disk}2 # formata a particao do sistema
 
-                mount /dev/disk/by-label/nixos /mnt
+                mount ${system_disk}2 /mnt
 
                 mkdir -p /mnt/{nix,boot,home,git}
                 
@@ -97,7 +97,7 @@
 
                 mkfs.f2fs -l nixos -f ${system_disk}2 # formata a particao do sistema
 
-                mount /dev/disk/by-label/nixos /mnt
+                mount ${system_disk}2 /mnt
 
                 mkdir -p /mnt/{nix,boot,home,git}
                 
