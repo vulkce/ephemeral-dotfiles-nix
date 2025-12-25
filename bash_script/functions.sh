@@ -94,15 +94,17 @@
 		case $system_fs in
 			btrfs|zfs)
 				sed -i "9c\     fsBackend = \"$system_fs\";" /mnt/git/general-configs/filesystems/definition.nix
+
 				if [[ "$resp_ephemeral" == "s" || "$resp_ephemeral" == "sim" ]]; then
     				sed -i "187c\   ./ephemeral/$system_fs.nix;" /mnt/git/general-configs/filesystems/definition.nix
 				fi
 				;;
 			f2fs|ext4|xfs)
-				sed -i "18c\     fsRoot = \"$root_fs\";" /mnt/git/general-configs/filesystems/definition.nix
 				sed -i '9c\     fsBackend = "common";' /mnt/git/general-configs/filesystems/definition.nix
+				sed -i "18c\     fsRoot = \"$root_fs\";" /mnt/git/general-configs/filesystems/definition.nix
 				;;
 			tmpfs)
+				sed -i "9c\     fsBackend = \"$system_fs\";" /mnt/git/general-configs/filesystems/definition.nix
 				sed -i "18c\     fsRoot = \"$root_fs\";" /mnt/git/general-configs/filesystems/definition.nix
 				sed -i '13c\    tmpfs = true;' /mnt/git/general-configs/filesystems/definition.nix
 				;;
