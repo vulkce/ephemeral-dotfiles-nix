@@ -98,7 +98,7 @@
     isNormalUser = true;
     createHome = true;
     home = "/home/vulkce"; 
-    hashedPasswordFile = "/home/vulkce/passwords/vulkce";
+    hashedPasswordFile = "/nix/passwords/vulkce";
     extraGroups = [ "wheel" "networkmanager" "vboxusers" "docker" ];
   };
 
