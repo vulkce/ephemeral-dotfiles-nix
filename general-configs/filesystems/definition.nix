@@ -196,7 +196,7 @@ in
         fileSystems."/home" = {
           device  = homeDevice;
           fsType  = fsHome;
-          options = [ "mode=0755" ] ++ commonOpts;
+          options = [ "nofail" "x-systemd.device-timeout=5" ] ++ commonOpts;
         };
       };
     };
