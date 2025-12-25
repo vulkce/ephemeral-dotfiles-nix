@@ -119,7 +119,8 @@
 		mount /dev/disk/by-label/BOOT /mnt/boot
 
 		# instala o sistema
-		nixos-install --flake /mnt/git#flake
+		echo "agora voce pode instalar o sistema!"
+		echo "nixos-install --flake /mnt/git#flake"
 
 		return 0
 	}
