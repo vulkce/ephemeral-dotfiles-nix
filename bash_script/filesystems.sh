@@ -79,22 +79,17 @@
         ext4|xfs)
             boot # constroi o boot
 
-            mkfs.$system_fs -L nixos -f ${system_disk}2 # formata a particao do sistema
+            case $system_fs in
+                f2fs)
+                    mkfs.f2fs -l nixos -f ${system_disk}2
+                    ;;
+                *)
+                    mkfs.$system_fs -L nixos -f ${system_disk}2
+                    ;;
+            esac
             sync
 
-            mount ${system_disk}2 /mnt
-
-            mkdir -p /mnt/{nix,boot,home,nix/git}
-            
-            install # executa a instalacao
-            ;;
-        f2fs)
-            boot # constroi o boot
-
-            mkfs.f2fs -l nixos -f ${system_disk}2 # formata a particao do sistema
-            sync
-
-            mount -t f2fs ${system_disk}2 /mnt
+            mount -t $system_fs ${system_disk}2 /mnt
 
             mkdir -p /mnt/{nix,boot,home,nix/git}
             
