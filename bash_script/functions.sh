@@ -135,7 +135,7 @@
 				;;
 			f2fs|ext4|xfs)
 				sed -i \
-					-e "9c\  fsBackend = "common";" \
+					-e "9c\  fsBackend = \"common\";" \
 					-e "18c\  fsRoot = \"$system_fs\";" \
 				"$file"
 				;;

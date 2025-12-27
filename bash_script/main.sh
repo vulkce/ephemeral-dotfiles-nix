@@ -8,6 +8,9 @@
 	system_disk=""
 	system_fs=""
 	root_fs=""
+	resp_ephemeral=""
+	resp2=""
+	resp3=""
 
 	RED="\e[91m" # prefiro o vermelho mais claro!
 	GREEN="\e[32m"
