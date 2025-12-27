@@ -85,8 +85,6 @@
 	case "${resp3,,}" in
 		abort)
 			success "operacao encerrada pelo usuario"; exit 130;;
-		continue)
-		;;
 	esac
 
 	clear
