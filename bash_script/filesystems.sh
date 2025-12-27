@@ -2,23 +2,23 @@
         btrfs)
             boot # constroi o boot
 
-            mkfs.btrfs -L nixos -f ${system_disk}2 && \
+            mkfs.btrfs -L nixos -f ${system_disk}2
             sync
 
             # Montar e criar subvolumes
-            mount ${system_disk}2 /mnt && \
+            mount ${system_disk}2 /mnt
 
-            btrfs subvolume create /mnt/root && \
-            btrfs subvolume create /mnt/nix && \
-            btrfs subvolume create /mnt/safe && \
+            btrfs subvolume create /mnt/root
+            btrfs subvolume create /mnt/nix
+            btrfs subvolume create /mnt/safe
 
             # Criar snapshot vazia
-            btrfs subvolume snapshot -r /mnt/root /mnt/root-blank && \
+            btrfs subvolume snapshot -r /mnt/root /mnt/root-blank
 
-            umount /mnt && \
+            umount /mnt
 
             # Montar a raiz
-            mount -o subvol=root,noatime ${system_disk}2 /mnt && \
+            mount -o subvol=root,noatime ${system_disk}2 /mnt
 
             # cria os diretórios no liveCD 
             mkdir -p /mnt/{nix,safe,boot,home,git}
@@ -32,27 +32,27 @@
         zfs)
             boot # constroi o boot
 
-            zpool create -f -o ashift=12 nixos ${system_disk}2  # ashift=12 é bom para SSDs 
+            zpool create -f -o ashift=12 nixos ${system_disk}2 # ashift=12 é bom para SSDs 
             sync 
 
-            zfs create -o mountpoint=legacy nixos/system && \  # cria um dataset
+            zfs create -o mountpoint=legacy nixos/system # cria um dataset
 
             zfs set acltype=posixacl nixos/system # define as permissões do ZFS como POSIX
 
             # cria sub-datasets
-            zfs create -p -o mountpoint=legacy nixos/system/root && \
-            zfs create -p -o mountpoint=legacy nixos/system/nix && \
-            zfs create -p -o mountpoint=legacy nixos/system/safe && \
+            zfs create -p -o mountpoint=legacy nixos/system/root
+            zfs create -p -o mountpoint=legacy nixos/system/nix
+            zfs create -p -o mountpoint=legacy nixos/system/safe
 
-            zfs set compression=lz4 nixos/system && \  # compressão
+            zfs set compression=lz4 nixos/system # compressão
 
             # monta os datasets
-            mount -t zfs nixos/system/root /mnt && \
+            mount -t zfs nixos/system/root /mnt
             mkdir -p /mnt/{nix,safe,boot,home,git}
-            mount -t zfs nixos/system/nix /mnt/nix && \
-            mount -t zfs nixos/system/safe /mnt/safe && \
+            mount -t zfs nixos/system/nix /mnt/nix
+            mount -t zfs nixos/system/safe /mnt/safe
 
-            zfs snapshot nixos/system/root@blank && \  # cria uma snapshot vazia do root
+            zfs snapshot nixos/system/root@blank # cria uma snapshot vazia do root
             
             install # executa a instalacao
             ;;		
@@ -79,10 +79,10 @@
         ext4|xfs)
             boot # constroi o boot
 
-            mkfs.$system_fs -L nixos -f ${system_disk}2 && \  # formata a particao do sistema
+            mkfs.$system_fs -L nixos -f ${system_disk}2 # formata a particao do sistema
             sync
 
-            mount ${system_disk}2 /mnt && \
+            mount ${system_disk}2 /mnt
 
             mkdir -p /mnt/{nix,boot,home,git}
             
@@ -91,10 +91,10 @@
         f2fs)
             boot # constroi o boot
 
-            mkfs.f2fs -l nixos -f ${system_disk}2 && \  # formata a particao do sistema
+            mkfs.f2fs -l nixos -f ${system_disk}2 # formata a particao do sistema
             sync
 
-            mount ${system_disk}2 /mnt && \
+            mount ${system_disk}2 /mnt
 
             mkdir -p /mnt/{nix,boot,home,git}
             
