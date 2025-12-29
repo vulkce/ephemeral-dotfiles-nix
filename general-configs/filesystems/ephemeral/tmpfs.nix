@@ -9,7 +9,7 @@ in
   	"/safe" = { 
       device = "/dev/disk/by-label/nixos";
       fsType = fs;
-      options = [ "fmask=0077" "dmask=0077" ];
+      options = [ "noatime" ];
     };
 	};
 
