@@ -97,6 +97,13 @@ let
         fsType  = fsRoot;
         options = [ "noatime" ];
       };
+      
+      "/persist" = {
+        device  = rootDevice;
+        fsType  = fsRoot;
+        neededForBoot = true;
+        options = [ "noatime" ];
+      };
     };
 
     common = {

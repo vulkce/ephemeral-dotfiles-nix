@@ -1,18 +1,19 @@
-{ config, lib, pkgs, fsHome, ... }: 
+{ config, lib, pkgs, ... }: {
 
-let 
-	fs = fsHome;
-in
-
-{
   fileSystems = { 
-  	"/safeH" = { 
-      device = "/dev/disk/by-label/nixos";
-      fsType = fs;
-      options = [ "noatime" ];
+    "/safeH" = { 
+      device = "/persist/safeH";
+      fsType = "none";
+      options = [ "bind" ];
+      depends = [ "/persist" ];
       neededForBoot = true;
     };
-	};
+  };
+  
+  # cria o diretório safeH
+  systemd.tmpfiles.rules = [
+    "d /persist/safeH 0755 root root -"
+  ];
 
   environment.persistence."/safeH" = {
     enable = true;
