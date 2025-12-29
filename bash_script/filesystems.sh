@@ -62,10 +62,10 @@
             # Define FS e diretorios
             if [[ "$system_fs" != "tmpfs" ]]; then
                 fs="$system_fs"
-                dirs="/mnt/{nix,boot,home,nix/git}"
+                mkdir -p "/mnt/{nix,boot,home,nix/git}"
             else
                 fs="$root_fs"
-                dirs="/mnt/{nix/safe/system,boot,home,nix/git}"
+                mkdir -p /mnt/{nix/safe/system,boot,home,nix/git}
             fi
 
             # Formatação
@@ -81,7 +81,6 @@
             sync
 
             mount -t "$fs" "${system_disk}2" /mnt
-            mkdir -p $dirs
 
             install # executa a instalacao
             ;;
