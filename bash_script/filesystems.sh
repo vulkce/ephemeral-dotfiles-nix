@@ -60,15 +60,14 @@
             boot # constroi o boot
 
             case $root_fs in
-                btrfs|ext4|xfs)
-                    mkfs.$root_fs -L nixos -f ${system_disk}2
-                    sync
-                    ;;
                 f2fs)
-                    mkfs.$root_fs -l nixos -f ${system_disk}2
-                    sync
+                    mkfs.f2fs -l nixos -f ${system_disk}2
+                    ;;
+                *)
+                    mkfs.$root_fs -L nixos -f ${system_disk}2
                     ;;
             esac
+            sync
 
             mount -t $root_fs ${system_disk}2 /mnt
 
