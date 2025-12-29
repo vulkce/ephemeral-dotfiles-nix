@@ -1,4 +1,4 @@
-{ config, lib, pkgs, fsHome ... }: 
+{ config, lib, pkgs, fsHome, ... }: 
 
 let 
 	fs = fsHome;

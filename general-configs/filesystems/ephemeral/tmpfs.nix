@@ -1,4 +1,4 @@
-{ config, lib, pkgs, fsRoot ... }: 
+{ config, lib, pkgs, fsRoot, ... }: 
 
 let 
 	fs = fsRoot;
