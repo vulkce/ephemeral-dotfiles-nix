@@ -85,10 +85,9 @@
 		if [[ "$home_fs" != "tmpfs" ]]; then
 			wipefs -a $home_disk
 			parted $home_disk mklabel gpt
+			# muda nas configuracoes para o fs da home escolhido
+			sed -i "17c\  fsHome = \"$home_fs\";" $file
 		fi
-		
-		# muda nas configuracoes para o fs da home escolhido
-		sed -i "18c\  fsHome = \"$home_fs\";" $file
 
 		case $home_fs in
 			ext4|xfs|btrfs)
@@ -108,8 +107,7 @@
 				;;
 			tmpfs)
 				sed -i \
-					-e "131c\    ./ephemeral/tmpfsH.nix" \
-					-e "14c\  tmpfsH = true;" \
+					-e "129c\    ./ephemeral/tmpfsH.nix" \
 				"$file"
 				;;
 		esac
@@ -124,19 +122,19 @@
 				sed -i "10c\  fsBackend = \"$system_fs\";" $file
 
 				case $resp_ephemeral in
-					s|sim) sed -i "130c\    ./ephemeral/$system_fs.nix" $file;;
+					s|sim) sed -i "128c\    ./ephemeral/$system_fs.nix" $file;;
 				esac
 				;;
 			f2fs|ext4|xfs)
 				sed -i \
 					-e "10c\  fsBackend = \"common\";" \
-					-e "17c\  fsRoot = \"$system_fs\";" \
+					-e "16c\  fsRoot = \"$system_fs\";" \
 				"$file"
 				;;
 			tmpfs)
 				sed -i \
 					-e "10c\  fsBackend = \"$system_fs\";" \
-					-e "130c\    ./ephemeral/tmpfs.nix" \
+					-e "128c\    ./ephemeral/tmpfs.nix" \
 				"$file"
 				;;
 		esac

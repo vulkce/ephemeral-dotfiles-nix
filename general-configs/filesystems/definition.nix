@@ -11,8 +11,7 @@ let
 
   # non-common
   zfsH   = false; # zfs na home
-  tmpfsH = false; # tmpfs na home
-
+  
   # common
   fsRoot = ""; # fs do root
   fsHome = ""; # fs da Home
@@ -22,7 +21,6 @@ let
   # =========================
   homeDevice =
     if zfsH then "home/user"
-    else if tmpfsH then "none"
     else "/dev/disk/by-label/home";
 
   rootDevice = "/dev/disk/by-label/nixos";
