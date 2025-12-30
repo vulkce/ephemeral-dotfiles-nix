@@ -39,7 +39,13 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.vulkce = import ./home-manager/home.nix;
+          home-manager.extraSpecialArgs.flake-inputs = inputs;
+          
+          home-manager.users.vulkce.imports = [
+            flatpaks.homeManagerModules.nix-flatpak
+            ./home-manager/home.nix
+            ./flatpak.nix
+          ];
         }
       ];
     };
