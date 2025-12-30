@@ -44,7 +44,6 @@
           home-manager.users.vulkce.imports = [
             nix-flatpak.homeManagerModules.nix-flatpak
             ./home-manager/home.nix
-            ./flatpak.nix
           ];
         }
       ];
