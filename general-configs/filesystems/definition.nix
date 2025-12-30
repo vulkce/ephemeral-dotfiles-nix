@@ -11,7 +11,7 @@ let
 
   # non-common
   zfsH   = false; # zfs na home
-  
+
   # common
   fsRoot = ""; # fs do root
   fsHome = ""; # fs da Home
