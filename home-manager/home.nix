@@ -1,10 +1,12 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, inputs, ... }: {
 
   home = {
     username = "vulkce";
     homeDirectory = "/home/vulkce";
     stateVersion = "26.05";
     packages = with pkgs; [
+      flatpak
+      firefox
       tree
       vesktop
       mission-center

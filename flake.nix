@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    flatpaks.url = "github:gmodena/nix-flatpak/?ref=latest";
     impermanence.url = "github:nix-community/impermanence";
     home-manager.url = "github:nix-community/home-manager";
 
@@ -14,7 +14,7 @@
 
   outputs = inputs @ {
     self,
-    nix-flatpak,
+    flatpaks,
     nixpkgs-stable,
     nixpkgs,
     impermanence,
@@ -31,8 +31,7 @@
         ./general-configs/interfaces.nix # importa as interfaces
         ./general-configs/packages/packages.nix # importa os pacotes
         ./general-configs/packages/special-pkgs.nix # importa pacotes especiais
-
-        nix-flatpak.nixosModules.nix-flatpak
+        
         impermanence.nixosModules.impermanence
         home-manager.nixosModules.home-manager
 
@@ -40,10 +39,10 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs.flake-inputs = inputs;
+          home-manager.users.vulkce = import ./home-manager/home.nix;
           
-          home-manager.users.vulkce.imports = [
-            nix-flatpak.homeManagerModules.nix-flatpak
-            ./home-manager/home.nix
+          home-manager.sharedModules = [
+            flatpaks.homeManagerModules.nix-flatpak
           ];
         }
       ];
