@@ -28,16 +28,6 @@
       "dm-snapshot" 
     ];
     loader.systemd-boot.enable = true; # usa systemd-boot
-    # filesystems extras
-    supportedFilesystems = [ 
-      "zfs" 
-      "ext4" 
-      "xfs" 
-      "ntfs" 
-      "btrfs"
-      "f2fs"
-    ];
-    zfs.removeLinuxDRM = true; # protege o zfs caso futuras atts de kernels quebrem o zfs por conta da GPL
   };
 
   # options do networking

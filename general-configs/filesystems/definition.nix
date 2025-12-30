@@ -125,6 +125,20 @@ in
   
   ];
 
+  # filesystems
+  boot = {
+    supportedFilesystems = [ 
+      "zfs" 
+      "ext4" 
+      "xfs" 
+      "ntfs" 
+      "btrfs"
+      "f2fs"
+    ];
+    # protege o zfs
+    zfs.removeLinuxDRM = true;
+  };
+
   # =========================
   #     Specialisations
   # =========================
