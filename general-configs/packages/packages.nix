@@ -24,6 +24,7 @@
     javaPackages.compiler.openjdk25
 
     # coisas para WMs & DEs
+    gnome-extension-manager
     gnome-tweaks
     alacritty
     wl-clipboard
