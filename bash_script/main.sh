@@ -40,14 +40,14 @@
 	warn " -------------------------------------"
 	
 	# interacao inicial
-	warn "F2FS E INSTAVEL, USAR ELE SERA POR SUA CONTA E RISCO!"
+	warn "F2FS É INSTÁVEL! SEU USO PODE CAUSAR PROBLEMAS SÉRIOS."
 	info "FileSystems: [ ext4, xfs, btrfs, f2fs, zfs, tmpfs ]"
 	# passa parametros para dentro de funcoes, evitando repeticoes no codigo
-	system_fs=$(ask_choice "qual o filesystem para o sistema? " ext4 xfs btrfs f2fs zfs tmpfs)
-	system_disk=$(unidade "diga a unidade no qual o sistema vai ser instalado (/dev/sdX) " system) 
+	system_fs=$(ask_choice "qual o filesystem do sistema? " ext4 xfs btrfs f2fs zfs tmpfs)
+	system_disk=$(unidade "qual a unidade que o sistema vai ser instalado? (/dev/sdX) " system) 
 
 	case $system_fs in
-		btrfs|zfs) resp_ephemeral=$(ask_choice "voce deseja ativar o root efemero?: (s/n) " s n sim nao);;
+		btrfs|zfs) resp_ephemeral=$(ask_choice "você deseja ativar o root efêmero?: (s/n) " s n sim nao);;
 	esac
 	
 	clear
@@ -60,7 +60,7 @@
 			home_fs=$(ask_choice "Digite o filesystem da home " ext4 xfs btrfs f2fs zfs tmpfs)
 			
 			if [[ "$home_fs" != "tmpfs" ]]; then
-  				home_disk=$(unidade "qual a unidade que a home vai ser instalada? (/dev/sdX1) " home)
+  				home_disk=$(unidade "qual a unidade ou partição que a home vai ser instalada? (/dev/sdX1) " home)
 			fi
 			;;
 	esac
@@ -72,12 +72,13 @@
 	info " FS DA HOME:       $home_fs"
 	info " DISCO DO SISTEMA: $system_disk"
 	info " FS DO SISTEMA:    $system_fs"
+	info " BTRFS/ZFS EFÊMERO? $resp_ephemeral"
 	warn " ------------------------"
 
 	resp3=$(ask_choice "deseja continuar ou abortar? (continue/abort) " continue abort)
 
 	case $resp3 in
-		abort) success "operacao encerrada pelo usuario"; exit 130;;
+		abort) success "operação encerrada pelo usuário"; exit 130;;
 	esac
 
 	clear

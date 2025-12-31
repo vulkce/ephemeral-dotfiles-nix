@@ -149,7 +149,7 @@
 		mount /dev/disk/by-label/BOOT /mnt/boot
 
 		# instala o sistema
-		warn "agora voce pode instalar o sistema!"
+		warn "agora você pode instalar o sistema!"
 		success "sudo nixos-install --flake /mnt/nix/git#flake"
 
 		return 0
