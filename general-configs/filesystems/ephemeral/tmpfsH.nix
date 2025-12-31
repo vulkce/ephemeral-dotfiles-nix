@@ -20,6 +20,8 @@
         ".pki"
         ".vscode-oss"
         ".mozilla"
+        ".themes"
+        ".icons"
       ];
       files = [ 
         ".gitconfig" 
